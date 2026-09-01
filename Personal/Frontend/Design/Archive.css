@@ -98,6 +98,8 @@ body {
     text-shadow:
         1px 1px 0 #25070e,
         0 0 8px #d96b7e;
+
+    animation: logoGlow 4.3s ease-in-out infinite;
 }
 
 .logo-sub {
@@ -146,6 +148,8 @@ body {
     border-radius: 50%;
 
     box-shadow: 0 0 6px #ff7f96;
+
+    animation: statusBlink 1.8s ease-in-out infinite;
 }
 
 .avatar-frame {
@@ -166,6 +170,8 @@ body {
     box-shadow:
         inset 0 0 8px rgba(0, 0, 0, 0.85),
         0 0 10px rgba(180, 55, 80, 0.3);
+
+    animation: avatarPulse 6.1s ease-in-out infinite;
 }
 
 .avatar-frame img {
@@ -211,6 +217,12 @@ body {
     border-left: 1px solid transparent;
 
     border-right: 1px solid transparent;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        text-shadow 0.25s ease,
+        transform 0.25s ease;
 }
 
 .navigation a:hover {
@@ -219,6 +231,10 @@ body {
     color: #ffe7eb;
 
     border-color: #994455;
+
+    text-shadow: 0 0 8px #ff9aaa;
+
+    transform: translateY(-1px);
 }
 
 .navigation a.active {
@@ -229,6 +245,8 @@ body {
     border-left-color: #9b4657;
 
     border-right-color: #9b4657;
+
+    text-shadow: 0 0 7px rgba(255, 150, 170, 0.45);
 }
 
 .archive-content {
@@ -248,6 +266,8 @@ body {
 
     box-shadow:
         inset 0 0 14px rgba(255, 255, 255, 0.025);
+
+    animation: introEntrance 0.8s ease-out both;
 }
 
 .archive-title {
@@ -272,6 +292,8 @@ body {
 
     text-shadow:
         1px 1px #28070e;
+
+    animation: archiveTitleGlow 5.2s ease-in-out infinite;
 }
 
 .archive-intro-body {
@@ -292,6 +314,8 @@ body {
 
     text-shadow:
         0 0 6px rgba(220, 95, 115, 0.35);
+
+    animation: archiveHeadingGlitch 7.3s ease-in-out infinite;
 }
 
 .archive-intro-body p {
@@ -300,6 +324,8 @@ body {
     color: #d2b9be;
 
     line-height: 1.7;
+
+    animation: textEntrance 1s ease-out 0.2s both;
 }
 
 .archive-note {
@@ -314,12 +340,52 @@ body {
     color: #e2aeb8 !important;
 
     text-align: center;
+
+    animation:
+        notePulse 4.7s ease-in-out infinite,
+        noteEntrance 0.8s ease-out 0.35s both;
 }
 
 .archive-year {
     border: 1px solid #843b4b;
 
     background: #16090d;
+
+    box-shadow:
+        inset 0 0 10px rgba(0, 0, 0, 0.3);
+
+    animation: yearEntrance 0.75s ease-out both;
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+.archive-year:nth-of-type(2) {
+    animation-delay: 0.18s;
+}
+
+.archive-year:nth-of-type(3) {
+    animation-delay: 0.36s;
+}
+
+.archive-year:nth-of-type(4) {
+    animation-delay: 0.54s;
+}
+
+.archive-year:nth-of-type(5) {
+    animation-delay: 0.72s;
+}
+
+.archive-year:hover {
+    border-color: #a94d5f;
+
+    box-shadow:
+        inset 0 0 10px rgba(0, 0, 0, 0.3),
+        0 0 13px rgba(180, 55, 80, 0.14);
+
+    transform: translateY(-1px);
 }
 
 .archive-year-title {
@@ -346,6 +412,8 @@ body {
     font-weight: bold;
 
     letter-spacing: 2px;
+
+    animation: yearTitleFlicker 8.1s ease-in-out infinite;
 }
 
 .archive-entry {
@@ -354,6 +422,28 @@ body {
     grid-template-columns: 105px 1fr;
 
     border-bottom: 1px solid #32121a;
+
+    animation: entryEntrance 0.65s ease-out both;
+}
+
+.archive-entry:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+.archive-entry:nth-child(3) {
+    animation-delay: 0.27s;
+}
+
+.archive-entry:nth-child(4) {
+    animation-delay: 0.42s;
+}
+
+.archive-entry:nth-child(5) {
+    animation-delay: 0.57s;
+}
+
+.archive-entry:nth-child(6) {
+    animation-delay: 0.72s;
 }
 
 .archive-entry:last-child {
@@ -376,10 +466,22 @@ body {
     font-size: 10px;
 
     text-align: center;
+
+    animation: datePulse 6.4s ease-in-out infinite;
 }
 
 .archive-entry-body {
     padding: 15px;
+
+    transition:
+        background 0.3s ease,
+        padding-left 0.3s ease;
+}
+
+.archive-entry:hover .archive-entry-body {
+    background: rgba(110, 30, 48, 0.08);
+
+    padding-left: 18px;
 }
 
 .archive-entry-body h2 {
@@ -393,6 +495,11 @@ body {
         serif;
 
     font-size: 17px;
+
+    text-shadow:
+        0 0 4px rgba(220, 95, 115, 0.18);
+
+    animation: entryTitleFlicker 9.2s ease-in-out infinite;
 }
 
 .archive-entry-body p {
@@ -411,10 +518,20 @@ body {
     font-weight: bold;
 
     text-decoration: underline;
+
+    transition:
+        color 0.25s ease,
+        text-shadow 0.25s ease,
+        transform 0.25s ease;
 }
 
 .archive-link:hover {
     color: #ffe1e6;
+
+    text-shadow:
+        0 0 7px #e19aaa;
+
+    transform: translateX(3px);
 }
 
 .archive-footer {
@@ -435,6 +552,8 @@ body {
     text-align: center;
 
     letter-spacing: 1px;
+
+    animation: archiveFooterPulse 5.8s ease-in-out infinite;
 }
 
 .footer {
@@ -453,6 +572,286 @@ body {
     font-size: 9px;
 
     text-align: center;
+
+    animation: footerPulse 7.7s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+    0%,
+    100% {
+        text-shadow:
+            1px 1px 0 #25070e,
+            0 0 7px #d96b7e;
+    }
+
+    42% {
+        text-shadow:
+            1px 1px 0 #25070e,
+            0 0 15px #ef8798;
+    }
+
+    47% {
+        text-shadow:
+            1px 1px 0 #25070e,
+            0 0 4px #d96b7e;
+    }
+
+    51% {
+        text-shadow:
+            1px 1px 0 #25070e,
+            0 0 17px #ff9aaa;
+    }
+}
+
+@keyframes statusBlink {
+    0%,
+    100% {
+        opacity: 0.55;
+        transform: scale(0.9);
+        box-shadow: 0 0 4px #ff7f96;
+    }
+
+    43% {
+        opacity: 1;
+        transform: scale(1.15);
+        box-shadow: 0 0 12px #ff7f96;
+    }
+
+    61% {
+        opacity: 0.72;
+        transform: scale(1);
+        box-shadow: 0 0 6px #ff7f96;
+    }
+}
+
+@keyframes avatarPulse {
+    0%,
+    100% {
+        box-shadow:
+            inset 0 0 8px rgba(0, 0, 0, 0.85),
+            0 0 8px rgba(180, 55, 80, 0.2);
+    }
+
+    52% {
+        box-shadow:
+            inset 0 0 8px rgba(0, 0, 0, 0.85),
+            0 0 18px rgba(210, 75, 100, 0.42);
+    }
+}
+
+@keyframes introEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes archiveTitleGlow {
+    0%,
+    100% {
+        text-shadow:
+            1px 1px #28070e;
+    }
+
+    50% {
+        text-shadow:
+            1px 1px #28070e,
+            0 0 9px rgba(255, 155, 175, 0.45);
+    }
+}
+
+@keyframes archiveHeadingGlitch {
+    0%,
+    86%,
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+
+        text-shadow:
+            0 0 6px rgba(220, 95, 115, 0.35);
+    }
+
+    88% {
+        transform: translateX(1px);
+        opacity: 0.82;
+
+        text-shadow:
+            -2px 0 #ff7f96,
+            2px 0 #641f30;
+    }
+
+    89% {
+        transform: translateX(-1px);
+        opacity: 0.94;
+    }
+
+    90% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes textEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes noteEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes notePulse {
+    0%,
+    100% {
+        border-color: #914353;
+
+        box-shadow:
+            0 0 0 rgba(220, 80, 105, 0);
+    }
+
+    48% {
+        border-color: #b85b6c;
+
+        box-shadow:
+            0 0 10px rgba(220, 80, 105, 0.18);
+    }
+
+    54% {
+        border-color: #914353;
+
+        box-shadow:
+            0 0 3px rgba(220, 80, 105, 0.08);
+    }
+}
+
+@keyframes yearEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(13px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes yearTitleFlicker {
+    0%,
+    90%,
+    100% {
+        opacity: 1;
+
+        text-shadow:
+            0 0 4px rgba(220, 95, 115, 0.18);
+    }
+
+    92% {
+        opacity: 0.8;
+
+        text-shadow:
+            -1px 0 #ff7f96,
+            1px 0 #641f30;
+    }
+
+    94% {
+        opacity: 1;
+    }
+}
+
+@keyframes entryEntrance {
+    from {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes datePulse {
+    0%,
+    100% {
+        opacity: 0.72;
+    }
+
+    46% {
+        opacity: 1;
+    }
+
+    49% {
+        opacity: 0.45;
+    }
+
+    52% {
+        opacity: 0.88;
+    }
+}
+
+@keyframes entryTitleFlicker {
+    0%,
+    92%,
+    100% {
+        opacity: 1;
+    }
+
+    94% {
+        opacity: 0.78;
+
+        text-shadow:
+            -1px 0 #e19aaa,
+            1px 0 #4b1d28;
+    }
+
+    95% {
+        opacity: 1;
+    }
+}
+
+@keyframes archiveFooterPulse {
+    0%,
+    100% {
+        border-color: #4b1d28;
+        box-shadow: 0 0 0 rgba(180, 55, 80, 0);
+    }
+
+    50% {
+        border-color: #71303d;
+        box-shadow: 0 0 9px rgba(180, 55, 80, 0.14);
+    }
+}
+
+@keyframes footerPulse {
+    0%,
+    100% {
+        border-top-color: #54212c;
+    }
+
+    50% {
+        border-top-color: #843b4b;
+    }
 }
 
 @media (max-width: 700px) {
@@ -523,5 +922,16 @@ body {
         flex-direction: column;
 
         gap: 7px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
