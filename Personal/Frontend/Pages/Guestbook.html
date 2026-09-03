@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Guestbook | Jane's Corner of the Internet</title>
+
+    <link rel="stylesheet" href="../Design/Guestbook.css">
+
+</head>
+
+
+<body class="guestbook-page">
+
+    <div class="page">
+
+        <header class="header">
+
+            <div class="header-left">
+
+                <div class="logo">
+
+                    <span class="logo-main">
+                        JANE
+                    </span>
+
+                    <span class="logo-sub">
+                        MY LITTLE CORNER OF THE INTERNET
+                    </span>
+
+                </div>
+
+
+                <div class="status">
+
+                    <span class="status-dot"></span>
+
+                    ONLINE
+
+                </div>
+
+            </div>
+
+
+            <div class="avatar-frame">
+
+                <img src="avatar.jpg" alt="Jane">
+
+            </div>
+
+        </header>
+
+
+        <nav class="navigation">
+
+            <a href="../../../index.html">
+                HOME
+            </a>
+
+            <a href="Yapping_Page.html">
+                BLOG
+            </a>
+
+            <a href="Archive.html">
+                ARCHIVE
+            </a>
+
+            <a href="Projects.html">
+                PROJECTS
+            </a>
+
+            <a href="Gallery.html">
+                GALLERY
+            </a>
+
+            <a href="Shrine.html">
+                SHRINE
+            </a>
+
+            <a href="About.html">
+                ABOUT
+            </a>
+
+            <a href="Guestbook.html" class="active">
+                GUESTBOOK
+            </a>
+
+        </nav>
+
+
+        <main class="guestbook-container">
+
+            <!-- Decorative CRT nonsense.
+                 These don't actually do anything useful.
+                 They simply make the website look radioactive. -->
+
+            <div class="scanlines"></div>
+
+            <div class="radioactive-glow"></div>
+
+
+            <section class="guestbook-header">
+
+                <div class="system-warning">
+                    ⚠ SYSTEM MESSAGE BUFFER
+                </div>
+
+
+                <h1>
+                    GUESTBOOK
+                </h1>
+
+
+                <p class="guestbook-subtitle">
+                    VISITOR COMMUNICATION TERMINAL
+                </p>
+
+
+                <div class="terminal-status">
+
+                    <span>
+                        ● MESSAGE SERVICE: STATIC
+                    </span>
+
+                    <span>
+                        ● WINDOW MANAGER: ACTIVE
+                    </span>
+
+                    <span>
+                        ● SYSTEM INTEGRITY: 87%
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <section class="message-system">
+
+                <div class="message-status">
+
+                    <span id="message-range">
+                        BUFFER: 01—07 / 23
+                    </span>
+
+                    <span id="window-count">
+                        WINDOWS: 07 / 07
+                    </span>
+
+                </div>
+
+
+                <!-- JavaScript will throw the fake Windows
+                     into this poor innocent container. -->
+
+                <div
+                    id="message-field"
+                    class="message-field">
+                </div>
+
+
+                <div class="message-controls">
+
+                    <button
+                        type="button"
+                        id="next-messages"
+                        class="terminal-button">
+
+                        ↻ LOAD NEXT 7 MESSAGES
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <section class="guestbook-entry">
+
+                <div class="entry-window">
+
+                    <div class="window-titlebar">
+
+                        <span>
+                            ✉ WRITE_MESSAGE.EXE
+                        </span>
+
+                        <span>
+                            ×
+                        </span>
+
+                    </div>
+
+
+                    <div class="entry-content">
+
+                        <p>
+                            Leave something behind in the machine.
+                        </p>
+
+
+                        <label for="visitor-name">
+                            IDENTIFICATION:
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="visitor-name"
+                            placeholder="Your name..."
+                            maxlength="30"
+                        >
+
+
+                        <label for="visitor-message">
+                            MESSAGE:
+                        </label>
+
+
+                        <textarea
+                            id="visitor-message"
+                            placeholder="Type your message..."
+                            maxlength="300"
+                            rows="5"
+                        ></textarea>
+
+
+                        <button
+                            type="button"
+                            id="submit-message"
+                            class="terminal-button">
+
+                            [ SUBMIT MESSAGE ]
+
+                        </button>
+
+
+                        <p
+                            id="submit-status"
+                            class="submit-status"
+                            aria-live="polite">
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <footer class="guestbook-footer">
+
+                <span>
+                    GUESTBOOK.EXE
+                </span>
+
+                <span>
+                    MEMORY BUFFER: 43%
+                </span>
+
+                <span>
+                    CONNECTION: STATIC
+                </span>
+
+            </footer>
+
+        </main>
+
+
+        <footer class="footer">
+
+            <div>
+                © 2026 Jane's Website
+            </div>
+
+            <div>
+                Best viewed at 1024 × 768
+            </div>
+
+            <div>
+                Made with HTML &amp; CSS &amp; JavaScript
+            </div>
+
+        </footer>
+
+    </div>
+
+
+    <!-- The JavaScript has been banished from this file
+         because HTML files deserve to have peace. -->
+
+    <script src="../Scripting/Guestbook.js"></script>
+
+</body>
+
+</html>
