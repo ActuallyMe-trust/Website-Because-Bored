@@ -406,7 +406,7 @@ body::after {
 
     flex-direction: column;
 
-    gap: 15px;
+    gap: auto;
 
     position: relative;
 }
@@ -998,7 +998,12 @@ body::after {
 }
 
 .entry-window {
-    max-width: 650px;
+
+    width: 100%;
+
+    max-width: none;
+
+    box-sizing: border-box;
 
     margin: auto;
 
