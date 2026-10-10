@@ -1,144 +1,4 @@
-const messages = [
-
-    {
-        name: "Jane",
-        message: "This website looks like it escaped from 2009.",
-        date: "09/03/2026"
-    },
-
-    {
-        name: "Unknown User",
-        message: "I don't know what this place is, but I like it.",
-        date: "09/03/2026"
-    },
-
-    {
-        name: "SYSTEM",
-        message: "Visitor detected. Please remain calm.",
-        date: "09/02/2026"
-    },
-
-    {
-        name: "404",
-        message: "I was looking for a normal website. I found this instead.",
-        date: "09/02/2026"
-    },
-
-    {
-        name: "Ghost",
-        message: "Someone left the lights on.",
-        date: "09/01/2026"
-    },
-
-    {
-        name: "Anonymous",
-        message: "The green glow is probably harmless.",
-        date: "09/01/2026"
-    },
-
-    {
-        name: "Unknown Process",
-        message: "ERROR: Visitor enjoyed website too much.",
-        date: "08/31/2026"
-    },
-
-    {
-        name: "Jane",
-        message: "Why does every window look like it is about to crash?",
-        date: "08/31/2026"
-    },
-
-    {
-        name: "Guest_09",
-        message: "Greetings from somewhere on the internet.",
-        date: "08/30/2026"
-    },
-
-    {
-        name: "ERROR",
-        message: "Something happened. Nobody knows what.",
-        date: "08/30/2026"
-    },
-
-    {
-        name: "Visitor",
-        message: "I have successfully entered the strange website.",
-        date: "08/29/2026"
-    },
-
-    {
-        name: "Anonymous",
-        message: "Nice shrine. Slightly concerned about the guestbook.",
-        date: "08/29/2026"
-    },
-
-    {
-        name: "USER_001",
-        message: "Hello.",
-        date: "08/28/2026"
-    },
-
-    {
-        name: "SYSTEM",
-        message: "Message received. Processing...",
-        date: "08/28/2026"
-    },
-
-    {
-        name: "Lost Soul",
-        message: "I clicked one link and somehow ended up here.",
-        date: "08/27/2026"
-    },
-
-    {
-        name: "Visitor",
-        message: "The interface is completely unhinged.",
-        date: "08/27/2026"
-    },
-
-    {
-        name: "UNKNOWN",
-        message: "Who authorized this website?",
-        date: "08/26/2026"
-    },
-
-    {
-        name: "Guest_17",
-        message: "I approve of the radioactive aesthetic.",
-        date: "08/26/2026"
-    },
-
-    {
-        name: "SYSTEM ERROR",
-        message: "Normal behavior has not been detected.",
-        date: "08/25/2026"
-    },
-
-    {
-        name: "Anonymous",
-        message: "Leaving this here before the machine notices me.",
-        date: "08/25/2026"
-    },
-
-    {
-        name: "Visitor",
-        message: "This is definitely a guestbook.",
-        date: "08/24/2026"
-    },
-
-    {
-        name: "USER_404",
-        message: "Page not found. Message found.",
-        date: "08/24/2026"
-    },
-
-    {
-        name: "Unknown",
-        message: "Good luck maintaining this thing.",
-        date: "08/23/2026"
-    }
-
-];
+let messages = [];
 
 const WINDOWS_PER_PAGE = 7;
 
@@ -146,104 +6,121 @@ let currentPage = 0;
 
 let highestZIndex = 10;
 
-const messageField =
-    document.getElementById("message-field");
+const messageField = document.getElementById("message-field");
 
-const nextButton =
-    document.getElementById("next-messages");
+const nextButton = document.getElementById("next-messages");
 
-const messageRange =
-    document.getElementById("message-range");
+const messageRange = document.getElementById("message-range");
 
-const windowCount =
-    document.getElementById("window-count");
+const windowCount = document.getElementById("window-count");
 
-function displayMessages() {
+const nameInput = document.getElementById("visitor-name");
 
-    messageField.innerHTML = "";
+const messageInput = document.getElementById("visitor-message");
 
-    const start =
-        currentPage * WINDOWS_PER_PAGE;
+const submitButton = document.getElementById("submit-message");
 
-    const end =
-        start + WINDOWS_PER_PAGE;
+const submitStatus = document.getElementById("submit-status");
 
-    if (start >= messages.length) {
+async function loadMessages() {
+  try {
+    const response = await fetch("/api/comments");
 
-        currentPage = 0;
-
-        displayMessages();
-
-        return;
-
+    if (!response.ok) {
+      throw new Error("Failed to load messages.");
     }
 
-    const currentMessages =
-        messages.slice(start, end);
+    messages = await response.json();
 
-    currentMessages.forEach((message, index) => {
+    currentPage = 0;
 
-        const messageWindow =
-            createMessageWindow(message, index);
+    displayMessages();
+  } catch (error) {
+    console.error("Guestbook error:", error);
 
-        messageField.appendChild(messageWindow);
+    messageField.innerHTML = `
+            <p>
+                Unable to connect to the message service.
+            </p>
+        `;
+  }
+}
 
-    });
+function displayMessages() {
+  messageField.innerHTML = "";
 
-    const visibleStart =
-        start + 1;
+  if (messages.length === 0) {
+    messageRange.textContent = "BUFFER: 00—00 / 0";
 
-    const visibleEnd =
-        start + currentMessages.length;
+    windowCount.textContent = `WINDOWS: 0 / ${WINDOWS_PER_PAGE}`;
 
-    messageRange.textContent =
-        `BUFFER: ${String(visibleStart).padStart(2, "0")}—${String(visibleEnd).padStart(2, "0")} / ${messages.length}`;
+    if (nextButton) {
+      nextButton.disabled = true;
+    }
 
-    windowCount.textContent =
-        `WINDOWS: ${currentMessages.length} / ${WINDOWS_PER_PAGE}`;
+    return;
+  }
 
+  const totalPages = Math.ceil(messages.length / WINDOWS_PER_PAGE);
+
+  if (currentPage >= totalPages) {
+    currentPage = 0;
+  }
+
+  const start = currentPage * WINDOWS_PER_PAGE;
+
+  const end = start + WINDOWS_PER_PAGE;
+
+  const currentMessages = messages.slice(start, end);
+
+  currentMessages.forEach((message, index) => {
+    const messageWindow = createMessageWindow(message, index);
+
+    messageField.appendChild(messageWindow);
+  });
+
+  const visibleStart = start + 1;
+
+  const visibleEnd = start + currentMessages.length;
+
+  messageRange.textContent = `BUFFER: ${String(visibleStart).padStart(2, "0")}—${String(visibleEnd).padStart(2, "0")} / ${messages.length}`;
+
+  windowCount.textContent = `WINDOWS: ${currentMessages.length} / ${WINDOWS_PER_PAGE}`;
+
+  if (nextButton) {
+    nextButton.disabled = totalPages <= 1;
+  }
 }
 
 function createMessageWindow(message, index) {
+  const window = document.createElement("article");
 
-    const window =
-        document.createElement("article");
+  window.classList.add("message-window");
 
-    window.classList.add("message-window");
+  const windowColors = [
+    "window-cyan",
+    "window-cherry",
+    "window-green",
+    "window-purple",
+  ];
 
-    const windowColors = [
-        "window-cyan",
-        "window-cherry",
-        "window-green",
-        "window-purple"
-    ];
+  window.classList.add(windowColors[index % windowColors.length]);
 
-    window.classList.add(
-        windowColors[index % windowColors.length]
-    );
+  const offsetX = Math.random() * 55;
 
-    const offsetX =
-        Math.random() * 55;
+  const offsetY = Math.random() * 45;
 
-    const offsetY =
-        Math.random() * 45;
+  window.style.left = `${15 + offsetX}%`;
 
-    window.style.left =
-        `${15 + offsetX}%`;
+  window.style.top = `${10 + offsetY}%`;
 
-    window.style.top =
-        `${10 + offsetY}%`;
+  const rotation = Math.random() * 4 - 2;
 
-    const rotation =
-        (Math.random() * 4) - 2;
+  window.style.transform = `rotate(${rotation}deg)`;
 
-    window.style.transform =
-        `rotate(${rotation}deg)`;
+  window.style.zIndex = highestZIndex++;
 
-    window.style.zIndex =
-        highestZIndex++;
-
-    window.innerHTML = `
+  window.innerHTML = `
 
         <div class="window-titlebar">
 
@@ -280,196 +157,202 @@ function createMessageWindow(message, index) {
 
     `;
 
-    window.addEventListener("mousedown", () => {
+  window.addEventListener("mousedown", () => {
+    window.style.zIndex = highestZIndex++;
+  });
 
-        window.style.zIndex =
-            highestZIndex++;
+  const closeButton = window.querySelector(".window-close");
 
-    });
+  closeButton.addEventListener("click", (event) => {
+    event.stopPropagation();
 
-    const closeButton =
-        window.querySelector(".window-close");
+    window.remove();
 
-    closeButton.addEventListener("click", (event) => {
+    updateWindowCount();
+  });
 
-        event.stopPropagation();
+  makeDraggable(window);
 
-        window.remove();
-
-        updateWindowCount();
-
-    });
-
-    makeDraggable(window);
-
-    return window;
-
+  return window;
 }
 
 function getWindowTitle(index) {
+  const titles = [
+    "GUESTBOOK.EXE",
+    "MESSAGE.EXE",
+    "VISITOR_LOG.EXE",
+    "SYSTEM_WARNING.EXE",
+    "USER_REPORT.EXE",
+    "UNKNOWN_PROCESS.EXE",
+    "ERROR_0x0000.EXE",
+  ];
 
-    const titles = [
-
-        "GUESTBOOK.EXE",
-        "MESSAGE.EXE",
-        "VISITOR_LOG.EXE",
-        "SYSTEM_WARNING.EXE",
-        "USER_REPORT.EXE",
-        "UNKNOWN_PROCESS.EXE",
-        "ERROR_0x0000.EXE"
-
-    ];
-
-    return titles[index % titles.length];
-
+  return titles[index % titles.length];
 }
 
 function makeDraggable(window) {
+  const titlebar = window.querySelector(".window-titlebar");
 
-    const titlebar =
-        window.querySelector(".window-titlebar");
+  let dragging = false;
 
-    let dragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
 
-    let offsetX = 0;
-    let offsetY = 0;
+  let rotation = "";
 
-    let rotation = "";
+  titlebar.addEventListener("mousedown", (event) => {
+    if (event.target.closest(".window-close")) {
+      return;
+    }
 
-    titlebar.addEventListener("mousedown", (event) => {
+    dragging = true;
 
-        if (event.target.closest(".window-close")) {
-            return;
-        }
+    rotation = window.style.transform;
 
-        dragging = true;
+    window.style.transform = "none";
 
-        rotation =
-            window.style.transform;
+    const windowRect = window.getBoundingClientRect();
 
-        window.style.transform =
-            "none";
+    const fieldRect = messageField.getBoundingClientRect();
 
-        const windowRect =
-            window.getBoundingClientRect();
+    offsetX = event.clientX - windowRect.left;
 
-        const fieldRect =
-            messageField.getBoundingClientRect();
+    offsetY = event.clientY - windowRect.top;
 
-        offsetX =
-            event.clientX -
-            windowRect.left;
+    window.style.left = `${windowRect.left - fieldRect.left}px`;
 
-        offsetY =
-            event.clientY -
-            windowRect.top;
+    window.style.top = `${windowRect.top - fieldRect.top}px`;
 
-        window.style.left =
-            `${windowRect.left - fieldRect.left}px`;
+    window.style.right = "auto";
 
-        window.style.top =
-            `${windowRect.top - fieldRect.top}px`;
+    window.style.bottom = "auto";
 
-        window.style.right =
-            "auto";
+    highestZIndex++;
 
-        window.style.bottom =
-            "auto";
+    window.style.zIndex = highestZIndex;
 
-        highestZIndex++;
+    document.body.style.userSelect = "none";
 
-        window.style.zIndex =
-            highestZIndex;
+    event.preventDefault();
+  });
 
-        document.body.style.userSelect =
-            "none";
+  document.addEventListener("mousemove", (event) => {
+    if (!dragging) {
+      return;
+    }
 
-        event.preventDefault();
+    window.style.transform = "none";
 
-    });
+    const fieldRect = messageField.getBoundingClientRect();
 
-    document.addEventListener("mousemove", (event) => {
+    const newLeft = event.clientX - fieldRect.left - offsetX;
 
-        if (!dragging) {
-            return;
-        }
+    const newTop = event.clientY - fieldRect.top - offsetY;
 
-        window.style.transform =
-            "none";
+    window.style.left = `${newLeft}px`;
 
-        const fieldRect =
-            messageField.getBoundingClientRect();
+    window.style.top = `${newTop}px`;
 
-        const newLeft =
-            event.clientX -
-            fieldRect.left -
-            offsetX;
+    window.style.transform = rotation;
 
-        const newTop =
-            event.clientY -
-            fieldRect.top -
-            offsetY;
+    event.preventDefault();
+  });
 
-        window.style.left =
-            `${newLeft}px`;
+  document.addEventListener("mouseup", () => {
+    if (!dragging) {
+      return;
+    }
 
-        window.style.top =
-            `${newTop}px`;
+    dragging = false;
 
-        window.style.transform =
-            rotation;
-
-        event.preventDefault();
-
-    });
-
-    document.addEventListener("mouseup", () => {
-
-        if (!dragging) {
-            return;
-        }
-
-        dragging = false;
-
-        document.body.style.userSelect =
-            "";
-
-    });
-
+    document.body.style.userSelect = "";
+  });
 }
 
 function updateWindowCount() {
+  const visibleWindows =
+    messageField.querySelectorAll(".message-window").length;
 
-    const visibleWindows =
-        messageField.querySelectorAll(".message-window").length;
-
-    windowCount.textContent =
-        `WINDOWS: ${visibleWindows} / ${WINDOWS_PER_PAGE}`;
-
+  windowCount.textContent = `WINDOWS: ${visibleWindows} / ${WINDOWS_PER_PAGE}`;
 }
 
 function escapeHTML(value) {
+  const div = document.createElement("div");
 
-    const div =
-        document.createElement("div");
+  div.textContent = value;
 
-    div.textContent =
-        value;
-
-    return div.innerHTML;
-
+  return div.innerHTML;
 }
 
 if (nextButton) {
+  nextButton.addEventListener("click", () => {
+    if (messages.length === 0) {
+      return;
+    }
 
-    nextButton.addEventListener("click", () => {
+    const totalPages = Math.ceil(messages.length / WINDOWS_PER_PAGE);
 
-        currentPage++;
+    currentPage++;
 
-        displayMessages();
+    if (currentPage >= totalPages) {
+      currentPage = 0;
+    }
 
-    });
-
+    displayMessages();
+  });
 }
 
-displayMessages();
+if (submitButton) {
+  submitButton.addEventListener("click", async () => {
+    const name = nameInput.value.trim();
+
+    const message = messageInput.value.trim();
+
+    if (!name || !message) {
+      submitStatus.textContent = "ERROR: Name and message are required.";
+
+      return;
+    }
+
+    submitButton.disabled = true;
+
+    submitStatus.textContent = "TRANSMITTING MESSAGE...";
+
+    try {
+      const response = await fetch("/api/comments", {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          name,
+          message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to submit message.");
+      }
+
+      nameInput.value = "";
+
+      messageInput.value = "";
+
+      submitStatus.textContent = "MESSAGE ACCEPTED.";
+
+      await loadMessages();
+    } catch (error) {
+      console.error("Guestbook submission error:", error);
+
+      submitStatus.textContent = "ERROR: Unable to submit message.";
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+}
+
+loadMessages();

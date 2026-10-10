@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Article Title // Jane's Corner</title>
+    <meta name="description" content="A short description of this article." />
+
+    <!--
+    JANE'S CORNER OF THE INTERNET
+    ARTICLE TEMPLATE
+
+    Keep this HTML as the reusable article structure.
+    All visual styling lives in article.css.
+
+    Markdown must be rendered into HTML before it is
+    inserted into .article-body.
+  -->
+
+    <link rel="stylesheet" href="../Design/Article-root.css" />
+  </head>
+
+  <body class="article-page">
+    <!-- SITE HEADER
+       Replace these links with your existing site routes. -->
+    <header class="site-header">
+      <a class="site-brand" href="../../../index.html">
+        JANE'S CORNER
+        <span class="brand-index">/ INTERNET DIVISION</span>
+      </a>
+
+      <div class="header-status">
+        <span class="status-dot"></span>
+        SYSTEM ONLINE
+      </div>
+
+      <a class="header-back" href="../index.html"> [ RETURN TO INDEX ] </a>
+    </header>
+
+    <main class="article-shell">
+      <!-- ARTICLE METADATA -->
+      <div class="article-topline">
+        <span>DOCUMENT // <span data-article-id>JC-0001</span></span>
+        <span>CLASSIFICATION // PUBLIC</span>
+        <span class="topline-right">EDITION 01</span>
+      </div>
+
+      <!-- ARTICLE TITLE -->
+      <header class="article-header">
+        <div class="article-category">
+          <span class="crosshair" aria-hidden="true">+</span>
+          <span data-article-category>PERSONAL LOG / 001</span>
+        </div>
+
+        <h1 class="article-title" data-article-title>
+          The Architecture of a Random Thought
+        </h1>
+
+        <p class="article-subtitle" data-article-subtitle>
+          An unnecessarily elaborate investigation into the things occupying the
+          human mind.
+        </p>
+
+        <div class="article-byline">
+          <span>AUTHOR // <strong>JANE</strong></span>
+          <span>DATE // <time datetime="2026-10-09">09 OCT 2026</time></span>
+          <span>READ TIME // 5 MIN</span>
+        </div>
+      </header>
+
+      <!-- OPTIONAL HERO MEDIA -->
+      <figure class="article-hero">
+        <div class="media-placeholder">
+          <span class="media-cross media-cross-tl">+</span>
+          <span class="media-cross media-cross-tr">+</span>
+          <span class="media-cross media-cross-bl">+</span>
+          <span class="media-cross media-cross-br">+</span>
+
+          <span class="media-index">FIG. 001</span>
+
+          <div class="media-message">
+            <span class="media-label">MEDIA NOT ATTACHED</span>
+            <span class="media-title">INSERT VISUAL DATA</span>
+            <span class="media-note">IMAGE / 16:9 / OPTIONAL</span>
+          </div>
+        </div>
+
+        <figcaption>
+          FIG. 001 // Replace this placeholder with your article image.
+        </figcaption>
+      </figure>
+
+      <!--
+      ARTICLE CONTENT
+
+      DEMO MODE:
+      The content below demonstrates the available styles.
+
+      PRODUCTION MODE:
+      Replace the demonstration content with HTML generated
+      from your Markdown source.
+
+      IMPORTANT:
+      Do not insert raw Markdown here and expect CSS to parse it.
+    -->
+      <article class="article-body">
+        <p class="article-lead">
+          Every thought begins somewhere. Sometimes it begins with a question,
+          sometimes with an observation, and sometimes with a brain that has
+          apparently abandoned its assigned duties.
+        </p>
+
+        <h2>01. The Initial Observation</h2>
+
+        <p>
+          This is a standard paragraph. It demonstrates the default typography,
+          line spacing, and width used for the main body of an article.
+        </p>
+
+        <p>
+          Paragraphs can contain <strong>bold text</strong>,
+          <em>italic text</em>, <del>deleted text</del>, <u>underlined text</u>,
+          and <code>inline_code()</code>. Links should also be distinguishable
+          from ordinary text, such as this
+          <a href="#article-reference">internal reference</a>.
+        </p>
+
+        <h3>A smaller heading</h3>
+
+        <p>
+          Use a third-level heading to divide a section into smaller topics
+          without interrupting the main hierarchy.
+        </p>
+
+        <hr />
+
+        <h2>02. Quoted Material</h2>
+
+        <blockquote>
+          <p>
+            The problem with overthinking is that eventually the thought starts
+            overthinking you.
+          </p>
+          <cite>— An entirely fictional department of philosophy</cite>
+        </blockquote>
+
+        <p>
+          Blockquotes are intended for quoted material, excerpts, or passages
+          that deserve their own visual treatment.
+        </p>
+
+        <h2>03. Lists and Instructions</h2>
+
+        <p>Unordered lists are useful for collections of items:</p>
+
+        <ul>
+          <li>Observe the problem.</li>
+          <li>Question the problem.</li>
+          <li>Build an unnecessarily complicated solution.</li>
+        </ul>
+
+        <p>Ordered lists are better for sequential instructions:</p>
+
+        <ol>
+          <li>Open the document.</li>
+          <li>Write the article.</li>
+          <li>Spend twenty minutes choosing a title.</li>
+        </ol>
+
+        <h2>04. Code and Technical Notes</h2>
+
+        <p>
+          Inline code uses the <code>code</code> element. Longer examples use a
+          preformatted block:
+        </p>
+
+        <pre><code>function overthink(subject) {
+  return subject
+    .analyze()
+    .reanalyze()
+    .questionEverything();
+}</code></pre>
+
+        <p>
+          Code blocks preserve whitespace and line breaks. They are not ordinary
+          paragraphs wearing a suspicious hat.
+        </p>
+
+        <h2>05. Tables</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>MODULE</th>
+                <th>STATUS</th>
+                <th>PRIORITY</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Writing</td>
+                <td>ACTIVE</td>
+                <td>HIGH</td>
+              </tr>
+              <tr>
+                <td>Overthinking</td>
+                <td>RUNNING</td>
+                <td>UNDEFINED</td>
+              </tr>
+              <tr>
+                <td>Sleep</td>
+                <td>NOT FOUND</td>
+                <td>CRITICAL</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>06. Images and Captions</h2>
+
+        <figure>
+          <img
+            src="images/example-image.jpg"
+            alt="A descriptive alternative text for the image"
+            loading="lazy"
+          />
+          <figcaption>
+            FIG. 002 // An example of an image embedded within the article.
+          </figcaption>
+        </figure>
+
+        <h2>07. A Final Note</h2>
+
+        <p>
+          This is where the article concludes. Use the final section to
+          summarize the discussion, add a personal reflection, or leave the
+          reader with one last thought.
+        </p>
+
+        <div class="article-callout">
+          <span class="callout-label">END OF TRANSMISSION</span>
+          <p>End the article here. Your brain is permitted to clock out.</p>
+        </div>
+      </article>
+
+      <!-- OPTIONAL TAGS -->
+      <footer class="article-footer">
+        <div class="footer-tags">
+          <span class="footer-label">INDEX TERMS</span>
+          <a href="#thoughts">#THOUGHTS</a>
+          <a href="#personal">#PERSONAL</a>
+          <a href="#writing">#WRITING</a>
+        </div>
+
+        <div class="article-endmark">
+          <span>DOCUMENT CLOSED</span>
+          <span>/// JC-0001 ///</span>
+        </div>
+      </footer>
+    </main>
+
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+      <span>JANE'S CORNER OF THE INTERNET</span>
+      <span>INDEPENDENT THOUGHTS. QUESTIONABLE SYSTEMS.</span>
+      <a href="../index.html">BACK TO MAIN INDEX ↑</a>
+    </footer>
+  </body>
+</html>

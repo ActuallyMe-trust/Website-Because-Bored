@@ -1,0 +1,937 @@
+/*
+ * JANE'S CORNER OF THE INTERNET
+ *
+ * Article stylesheet.
+ * Industrial editorial / monochromatic / technical interface.
+ *
+ * File: article.css
+ * Scope: .article-page and its descendants.
+ *
+ * Markdown rendering pipeline:
+ * Markdown -> HTML -> .article-body -> this stylesheet
+ *
+ * Apparently words need infrastructure now. Fair enough.
+ */
+
+/* =========================================================
+   01. DESIGN TOKENS
+   ========================================================= */
+
+:root {
+  color-scheme: dark;
+
+  --article-bg: #030504;
+  --article-panel: #080b09;
+  --article-panel-hover: #0e120f;
+
+  --article-text: #e6e9e5;
+  --article-muted: #858d86;
+  --article-dim: #535b54;
+
+  --article-border: #303831;
+  --article-border-strong: #606a61;
+
+  --article-accent: #d9e3d8;
+  --article-code-bg: #0b100c;
+
+  --article-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --article-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  --article-width: 1120px;
+  --article-reading-width: 760px;
+
+  --article-space-1: 0.5rem;
+  --article-space-2: 1rem;
+  --article-space-3: 1.5rem;
+  --article-space-4: 2rem;
+  --article-space-5: 3rem;
+  --article-space-6: 4rem;
+
+  --article-line: 1px solid var(--article-border);
+}
+
+/* =========================================================
+   02. RESET AND BASE
+   ========================================================= */
+
+.article-page,
+.article-page *,
+.article-page *::before,
+.article-page *::after {
+  box-sizing: border-box;
+}
+
+.article-page {
+  margin: 0;
+  min-height: 100vh;
+
+  background: var(--article-bg);
+  color: var(--article-text);
+
+  font-family: var(--article-font);
+  font-size: 16px;
+  line-height: 1.7;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.article-page img {
+  display: block;
+  max-width: 100%;
+}
+
+.article-page a {
+  color: inherit;
+}
+
+.article-page button,
+.article-page input,
+.article-page textarea,
+.article-page select {
+  font: inherit;
+}
+
+.article-page ::selection {
+  color: var(--article-bg);
+  background: var(--article-text);
+}
+
+.article-page :focus-visible {
+  outline: 1px solid var(--article-text);
+  outline-offset: 4px;
+}
+
+.article-page h1,
+.article-page h2,
+.article-page h3,
+.article-page h4,
+.article-page p,
+.article-page figure,
+.article-page blockquote,
+.article-page pre {
+  margin-top: 0;
+}
+
+.article-page .article-shell {
+  width: min(calc(100% - 48px), var(--article-width));
+
+  margin-inline: auto;
+}
+
+/* =========================================================
+   03. SITE HEADER
+   ========================================================= */
+
+.article-page .site-header {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: stretch;
+
+  min-height: 64px;
+  border-bottom: var(--article-line);
+}
+
+.article-page .site-brand,
+.article-page .header-status,
+.article-page .header-back {
+  display: flex;
+  align-items: center;
+
+  padding: 0.9rem 1.25rem;
+  text-decoration: none;
+}
+
+.article-page .site-brand {
+  gap: 0.75rem;
+
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.article-page .brand-index {
+  color: var(--article-muted);
+
+  font-family: var(--article-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+}
+
+.article-page .header-status {
+  gap: 0.55rem;
+
+  border-left: var(--article-line);
+
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 0.65rem;
+}
+
+.article-page .status-dot {
+  width: 7px;
+  height: 7px;
+
+  border: 1px solid var(--article-muted);
+  border-radius: 50%;
+  background: var(--article-text);
+}
+
+.article-page .header-back {
+  justify-content: center;
+
+  border-left: var(--article-line);
+
+  font-family: var(--article-mono);
+  font-size: 0.65rem;
+  transition:
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.article-page .header-back:hover {
+  color: var(--article-bg);
+  background: var(--article-text);
+}
+
+/* =========================================================
+   04. DOCUMENT METADATA
+   ========================================================= */
+
+.article-page .article-topline {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 1rem;
+
+  padding-block: 1rem;
+
+  border-bottom: var(--article-line);
+
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.07em;
+}
+
+.article-page .topline-right {
+  text-align: right;
+}
+
+/* =========================================================
+   05. ARTICLE HEADING
+   ========================================================= */
+
+.article-page .article-header {
+  padding-block: clamp(3rem, 8vw, 6.5rem) 2rem;
+}
+
+.article-page .article-category {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+
+  margin-bottom: 1.75rem;
+
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.article-page .crosshair {
+  color: var(--article-text);
+  font-size: 1.25rem;
+}
+
+.article-page .article-title {
+  max-width: 1000px;
+  margin-bottom: 1.5rem;
+
+  font-size: clamp(2.6rem, 7.5vw, 6.5rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.075em;
+
+  overflow-wrap: anywhere;
+}
+
+.article-page .article-subtitle {
+  max-width: 680px;
+  margin-bottom: 2.5rem;
+
+  color: var(--article-muted);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.65;
+}
+
+.article-page .article-byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+
+  padding-top: 1rem;
+  border-top: var(--article-line);
+
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+}
+
+.article-page .article-byline strong {
+  color: var(--article-text);
+  font-weight: 700;
+}
+
+/* =========================================================
+   06. HERO MEDIA AND FIGURES
+   ========================================================= */
+
+.article-page .article-hero {
+  margin: 0 0 4rem;
+}
+
+.article-page .media-placeholder {
+  position: relative;
+  display: grid;
+  place-items: center;
+
+  min-height: 240px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+
+  border: 1px solid var(--article-border-strong);
+
+  background-color: var(--article-panel);
+
+  background-image:
+    linear-gradient(
+      to right,
+      transparent calc(50% - 0.5px),
+      #283029 calc(50% - 0.5px),
+      #283029 calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(50% - 0.5px),
+      #283029 calc(50% - 0.5px),
+      #283029 calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
+    );
+}
+
+.article-page .media-message {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+
+  padding: 1rem;
+  text-align: center;
+}
+
+.article-page .media-label,
+.article-page .media-note,
+.article-page .media-index {
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+}
+
+.article-page .media-title {
+  font-size: clamp(1rem, 3vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.article-page .media-index {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.article-page .media-cross {
+  position: absolute;
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 1rem;
+}
+
+.article-page .media-cross-tl {
+  top: 0.5rem;
+  left: 0.5rem;
+}
+
+.article-page .media-cross-tr {
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.article-page .media-cross-bl {
+  bottom: 0.5rem;
+  left: 0.5rem;
+}
+
+.article-page .media-cross-br {
+  right: 0.5rem;
+  bottom: 0.5rem;
+}
+
+.article-page .article-page figcaption,
+.article-page figcaption {
+  margin-top: 0.75rem;
+
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 0.7rem;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   07. ARTICLE BODY
+   ========================================================= */
+
+.article-page .article-body {
+  width: min(100%, var(--article-reading-width));
+  margin-inline: auto;
+
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.article-page .article-body > * {
+  max-width: 100%;
+}
+
+.article-page .article-body p {
+  margin-bottom: 1.5rem;
+  color: #c5cbc5;
+  line-height: 1.9;
+}
+
+.article-page .article-body .article-lead {
+  margin-bottom: 3rem;
+
+  color: var(--article-text);
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  line-height: 1.8;
+}
+
+/* =========================================================
+   08. HEADING HIERARCHY
+   ========================================================= */
+
+.article-page .article-body h2 {
+  margin-top: 4rem;
+  margin-bottom: 1.25rem;
+  padding-top: 1rem;
+
+  border-top: 1px solid var(--article-border);
+
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+}
+
+.article-page .article-body h3 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+}
+
+.article-page .article-body h4 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+
+  font-family: var(--article-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   09. INLINE TEXT FORMATTING
+   ========================================================= */
+
+.article-page .article-body strong,
+.article-page .article-body b {
+  color: var(--article-text);
+  font-weight: 750;
+}
+
+.article-page .article-body em,
+.article-page .article-body i {
+  color: #d0d7d0;
+}
+
+.article-page .article-body del,
+.article-page .article-body s {
+  color: var(--article-muted);
+}
+
+.article-page .article-body u {
+  text-decoration-color: var(--article-muted);
+  text-underline-offset: 3px;
+}
+
+.article-page .article-body mark {
+  padding: 0.1em 0.3em;
+
+  background: var(--article-text);
+  color: var(--article-bg);
+}
+
+.article-page .article-body a {
+  color: var(--article-text);
+  text-decoration-color: var(--article-muted);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+
+  transition:
+    color 160ms ease,
+    text-decoration-color 160ms ease;
+}
+
+.article-page .article-body a:hover {
+  color: #ffffff;
+  text-decoration-color: #ffffff;
+}
+
+/* =========================================================
+   10. HORIZONTAL RULES
+   ========================================================= */
+
+.article-page .article-body hr {
+  height: 1px;
+  margin-block: 3rem;
+
+  border: 0;
+  background: var(--article-border);
+}
+
+/* =========================================================
+   11. BLOCKQUOTES
+   ========================================================= */
+
+.article-page .article-body blockquote {
+  margin: 2.5rem 0;
+  padding: 1.5rem 1.75rem;
+
+  border-left: 2px solid var(--article-text);
+  background: var(--article-panel);
+}
+
+.article-page .article-body blockquote p {
+  margin-bottom: 1rem;
+
+  color: var(--article-text);
+  font-size: 1.15rem;
+  line-height: 1.8;
+}
+
+.article-page .article-body blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.article-page .article-body blockquote cite {
+  display: block;
+  margin-top: 1rem;
+
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 0.7rem;
+  font-style: normal;
+}
+
+/* =========================================================
+   12. LISTS
+   ========================================================= */
+
+.article-page .article-body ul,
+.article-page .article-body ol {
+  margin: 1.5rem 0 2rem;
+  padding-left: 1.5rem;
+
+  color: #c5cbc5;
+}
+
+.article-page .article-body li {
+  margin-bottom: 0.65rem;
+  padding-left: 0.25rem;
+  line-height: 1.8;
+}
+
+.article-page .article-body ul {
+  list-style-type: square;
+}
+
+.article-page .article-body ul li::marker {
+  color: var(--article-muted);
+}
+
+.article-page .article-body ol li::marker {
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 0.85em;
+}
+
+.article-page .article-body li > ul,
+.article-page .article-body li > ol {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+/* =========================================================
+   13. INLINE CODE AND CODE BLOCKS
+   ========================================================= */
+
+.article-page .article-body :not(pre) > code {
+  padding: 0.2em 0.4em;
+
+  border: 1px solid var(--article-border);
+  background: var(--article-code-bg);
+
+  color: #dbe4da;
+  font-family: var(--article-mono);
+  font-size: 0.85em;
+
+  overflow-wrap: anywhere;
+}
+
+.article-page .article-body pre {
+  margin: 2rem 0;
+  padding: 1.5rem;
+
+  overflow-x: auto;
+
+  border: 1px solid var(--article-border);
+  background: var(--article-code-bg);
+
+  color: #dbe4da;
+  font-family: var(--article-mono);
+  font-size: 0.85rem;
+  line-height: 1.8;
+
+  tab-size: 2;
+}
+
+.article-page .article-body pre code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+
+  color: inherit;
+  font: inherit;
+
+  overflow-wrap: normal;
+}
+
+/* =========================================================
+   14. TABLES
+   ========================================================= */
+
+.article-page .article-body .table-wrap {
+  width: 100%;
+  margin: 2rem 0;
+  overflow-x: auto;
+
+  border: 1px solid var(--article-border);
+}
+
+.article-page .article-body table {
+  width: 100%;
+  border-collapse: collapse;
+
+  color: #c5cbc5;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.article-page .article-body th,
+.article-page .article-body td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--article-border);
+}
+
+.article-page .article-body th {
+  background: var(--article-panel);
+
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.article-page .article-body tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.article-page .article-body tbody tr:hover {
+  background: var(--article-panel-hover);
+}
+
+/* =========================================================
+   15. IMAGES AND FIGURES INSIDE ARTICLES
+   ========================================================= */
+
+.article-page .article-body figure {
+  margin: 2.5rem 0;
+}
+
+.article-page .article-body figure img {
+  width: 100%;
+  height: auto;
+
+  border: 1px solid var(--article-border);
+  background: var(--article-panel);
+}
+
+.article-page .article-body img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =========================================================
+   16. OPTIONAL CALLOUT
+   ========================================================= */
+
+.article-page .article-callout {
+  margin-block: 3rem;
+  padding: 1.5rem;
+
+  border: 1px solid var(--article-border-strong);
+  background: var(--article-panel);
+}
+
+.article-page .callout-label {
+  display: block;
+  margin-bottom: 1rem;
+
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+}
+
+.article-page .article-callout p {
+  margin-bottom: 0;
+  color: var(--article-text);
+}
+
+/* =========================================================
+   17. ARTICLE FOOTER AND TAGS
+   ========================================================= */
+
+.article-page .article-footer {
+  margin-top: 5rem;
+  border-top: 1px solid var(--article-border);
+}
+
+.article-page .footer-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+
+  padding-block: 1.5rem;
+}
+
+.article-page .footer-label {
+  margin-right: 0.5rem;
+
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.07em;
+}
+
+.article-page .footer-tags a {
+  padding: 0.35rem 0.6rem;
+
+  border: 1px solid var(--article-border);
+
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 0.65rem;
+  text-decoration: none;
+
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.article-page .footer-tags a:hover {
+  border-color: var(--article-text);
+  background: var(--article-text);
+  color: var(--article-bg);
+}
+
+.article-page .article-endmark {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding-block: 1rem;
+  border-top: 1px solid var(--article-border);
+
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+}
+
+/* =========================================================
+   18. SITE FOOTER
+   ========================================================= */
+
+.article-page .site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+
+  margin-top: 5rem;
+  padding: 1.5rem 24px;
+
+  border-top: 1px solid var(--article-border);
+
+  color: var(--article-muted);
+  font-family: var(--article-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+}
+
+.article-page .site-footer a {
+  text-decoration: none;
+}
+
+.article-page .site-footer a:hover {
+  color: var(--article-text);
+}
+
+/* =========================================================
+   19. RESPONSIVE LAYOUT
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .article-page .site-header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .article-page .site-brand {
+    padding-inline: 1rem;
+  }
+
+  .article-page .brand-index {
+    display: none;
+  }
+
+  .article-page .header-status {
+    display: none;
+  }
+
+  .article-page .header-back {
+    padding-inline: 1rem;
+    border-left: 1px solid var(--article-border);
+  }
+
+  .article-page .article-shell {
+    width: calc(100% - 32px);
+  }
+
+  .article-page .article-topline {
+    grid-template-columns: 1fr auto;
+    font-size: 0.6rem;
+  }
+
+  .article-page .article-topline > :nth-child(2) {
+    display: none;
+  }
+
+  .article-page .article-header {
+    padding-block: 3.5rem 2rem;
+  }
+
+  .article-page .article-title {
+    letter-spacing: -0.06em;
+  }
+
+  .article-page .article-byline {
+    gap: 0.65rem 1rem;
+  }
+
+  .article-page .article-hero {
+    margin-bottom: 3rem;
+  }
+
+  .article-page .media-placeholder {
+    min-height: 200px;
+  }
+
+  .article-page .article-body h2 {
+    margin-top: 3rem;
+  }
+
+  .article-page .article-body blockquote {
+    padding: 1.25rem;
+  }
+
+  .article-page .article-body pre {
+    padding: 1rem;
+    font-size: 0.78rem;
+  }
+
+  .article-page .article-body th,
+  .article-page .article-body td {
+    padding: 0.75rem;
+  }
+
+  .article-page .site-footer {
+    padding-inline: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .article-page .article-topline {
+    font-size: 0.55rem;
+  }
+
+  .article-page .article-byline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .article-page .media-placeholder {
+    min-height: 170px;
+  }
+
+  .article-page .article-endmark {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* =========================================================
+   20. ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .article-page *,
+  .article-page *::before,
+  .article-page *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

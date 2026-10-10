@@ -1,35 +1,32 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gallery | Jane's Corner of the Internet</title>
-    <link rel="stylesheet" href="../Design/Gallery.css">
-</head><body><div class="page">
-
-    <header class="header">
-
+    <link rel="stylesheet" href="../Design/Gallery.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
         <div class="header-left">
+          <div class="logo">
+            <span class="logo-main">JANE</span>
+            <span class="logo-sub">MY LITTLE CORNER OF THE INTERNET</span>
+          </div>
 
-            <div class="logo">
-                <span class="logo-main">JANE</span>
-                <span class="logo-sub">MY LITTLE CORNER OF THE INTERNET</span>
-            </div>
-
-            <div class="status">
-                <span class="status-dot"></span>
-                ONLINE
-            </div>
-
+          <div class="status">
+            <span class="status-dot"></span>
+            ONLINE
+          </div>
         </div>
 
         <div class="avatar-frame">
-            <img src="avatar.jpg" alt="Jane">
+          <img src="../Profile/avatar.jpg" alt="Jane" />
         </div>
+      </header>
 
-    </header>
-
-    <nav class="navigation">
-
+      <nav class="navigation">
         <a href="../../../index.html">HOME</a>
         <a href="Yapping_Page.html">BLOG</a>
         <a href="Archive.html">ARCHIVE</a>
@@ -38,311 +35,226 @@
         <a href="Shrine.html">SHRINE</a>
         <a href="About.html">ABOUT</a>
         <a href="Guestbook.html">GUEST BOOK</a>
+        <a href="Art.html">ARTWORKS</a>
+      </nav>
 
-    </nav>
-
-    <main class="gallery-content">
-
+      <main class="gallery-content">
         <section class="gallery-intro">
+          <div class="gallery-title">MY GALLERY</div>
 
-            <div class="gallery-title">
-                MY GALLERY
-            </div>
+          <div class="gallery-intro-body">
+            <h1>Things Worth Looking At</h1>
 
-            <div class="gallery-intro-body">
+            <p>
+              A collection of photographs, artwork, screenshots, memories, and
+              other things I've decided deserve a little space here.
+            </p>
 
-                <h1>
-                    Things Worth Looking At
-                </h1>
-
-                <p>
-                    A collection of photographs, artwork,
-                    screenshots, memories, and other things
-                    I've decided deserve a little space here.
-                </p>
-
-                <p class="gallery-note">
-                    ✦ Welcome to the picture vault. ✦
-                </p>
-
-            </div>
-
+            <p class="gallery-note">✦ Welcome to the picture vault. ✦</p>
+          </div>
         </section>
 
         <section class="gallery-toolbar">
+          <div class="gallery-count">
+            IMAGES IN ARCHIVE: <span id="gallery-count">006</span>
+          </div>
 
-            <div class="gallery-count">
-                IMAGES IN ARCHIVE: <span id="gallery-count">006</span>
-            </div>
+          <div class="gallery-categories">
+            <a href="#" class="category active" data-category="all"> ALL </a>
 
-            <div class="gallery-categories">
+            <a href="#" class="category" data-category="photos"> PHOTOS </a>
 
-                <a href="#" class="category active" data-category="all">
-                    ALL
-                </a>
+            <a href="#" class="category" data-category="art"> ART </a>
 
-                <a href="#" class="category" data-category="photos">
-                    PHOTOS
-                </a>
-
-                <a href="#" class="category" data-category="art">
-                    ART
-                </a>
-
-                <a href="#" class="category" data-category="random">
-                    RANDOM
-                </a>
-
-            </div>
-
+            <a href="#" class="category" data-category="random"> RANDOM </a>
+          </div>
         </section>
 
         <section class="gallery-grid">
+          <article class="gallery-item" data-category="photos">
+            <a href="#" class="image-frame">
+              <img src="../../Gallery/cc.jpg" alt="Cecilia foil pull" />
+            </a>
 
-            <article class="gallery-item" data-category="photos">
+            <div class="image-info">
+              <h2>Cecilia Foil Pull</h2>
 
-                <a href="#" class="image-frame">
-                    <img src="/Gallery/cc.jpg" alt="Cecilia foil pull">
-                </a>
+              <span class="image-date"> 05/24/2026 </span>
 
-                <div class="image-info">
+              <p>A lucky pull worthy of a place in here.</p>
 
-                    <h2>
-                        Cecilia Foil Pull
-                    </h2>
+              <a href="../../Gallery/cc.jpg" class="view-link" target="_blank">
+                » VIEW IMAGE
+              </a>
+            </div>
+          </article>
 
-                    <span class="image-date">
-                        05/24/2026
-                    </span>
+          <article class="gallery-item" data-category="photos">
+            <a href="#" class="image-frame">
+              <img src="../../Gallery/cous.jpg" alt="Cous" />
+            </a>
 
-                    <p>
-                        A lucky pull worthy of a place in here.
-                    </p>
+            <div class="image-info">
+              <h2>Someone Def</h2>
 
-                    <a href="/Gallery/cc.jpg" class="view-link" target="_blank">
-                        » VIEW IMAGE
-                    </a>
+              <span class="image-date"> 04/09/2026 </span>
 
-                </div>
+              <p>Def someone.</p>
 
-            </article>
+              <a
+                href="../../Gallery/cous.jpg"
+                class="view-link"
+                target="_blank"
+              >
+                » VIEW IMAGE
+              </a>
+            </div>
+          </article>
 
-            <article class="gallery-item" data-category="photos">
+          <article class="gallery-item" data-category="photos">
+            <a href="#" class="image-frame">
+              <img src="../../Gallery/food.jpg" alt="Food" />
+            </a>
 
-                <a href="#" class="image-frame">
-                    <img src="/Gallery/cous.jpg" alt="Cous">
-                </a>
+            <div class="image-info">
+              <h2>A Very Great Night</h2>
 
-                <div class="image-info">
+              <span class="image-date"> 08/03/2026 </span>
 
-                    <h2>
-                        Someone Def
-                    </h2>
+              <p>
+                A particularly good evening. Naturally it had to be preserved.
+              </p>
 
-                    <span class="image-date">
-                        04/09/2026
-                    </span>
+              <a
+                href="../../Gallery/food.jpg"
+                class="view-link"
+                target="_blank"
+              >
+                » VIEW IMAGE
+              </a>
+            </div>
+          </article>
 
-                    <p>
-                        Def someone.
-                    </p>
+          <article class="gallery-item" data-category="photos">
+            <a href="#" class="image-frame">
+              <img src="../../Gallery/AyameCar.jpg" alt="Ayame car" />
+            </a>
 
-                    <a href="/Gallery/cous.jpg" class="view-link" target="_blank">
-                        » VIEW IMAGE
-                    </a>
+            <div class="image-info">
+              <h2>Ayame Car From X</h2>
 
-                </div>
+              <span class="image-date"> 07/30/2026 </span>
 
-            </article>
+              <p>Ayame car I saw from X that looks cool.</p>
 
-            <article class="gallery-item" data-category="photos">
+              <a
+                href="../../Gallery/AyameCar.jpg"
+                class="view-link"
+                target="_blank"
+              >
+                » VIEW IMAGE
+              </a>
+            </div>
+          </article>
 
-                <a href="#" class="image-frame">
-                    <img src="/Gallery/food.jpg" alt="Food">
-                </a>
+          <article class="gallery-item" data-category="art">
+            <a href="#" class="image-frame">
+              <img src="../../Gallery/miku.jpg" alt="Scanlined Miku" />
+            </a>
 
-                <div class="image-info">
+            <div class="image-info">
+              <h2>Scanlined Miku</h2>
 
-                    <h2>
-                        A Very Great Night
-                    </h2>
+              <span class="image-date"> 08/18/2026 </span>
 
-                    <span class="image-date">
-                        08/03/2026
-                    </span>
+              <p>Scanlines me like.</p>
 
-                    <p>
-                        A particularly good evening.
-                        Naturally it had to be preserved.
-                    </p>
+              <a
+                href="../../Gallery/miku.jpg"
+                class="view-link"
+                target="_blank"
+              >
+                » VIEW IMAGE
+              </a>
+            </div>
+          </article>
 
-                    <a href="/Gallery/food.jpg" class="view-link" target="_blank">
-                        » VIEW IMAGE
-                    </a>
+          <article class="gallery-item" data-category="photos">
+            <a href="#" class="image-frame">
+              <img src="../../Gallery/Monstah.jpg" alt="Monstah" />
+            </a>
 
-                </div>
+            <div class="image-info">
+              <h2>MONSTAHH BIGG</h2>
 
-            </article>
+              <span class="image-date"> 08/12/2026 </span>
 
-            <article class="gallery-item" data-category="photos">
+              <p>I want it.</p>
 
-                <a href="#" class="image-frame">
-                    <img src="/Gallery/AyameCar.jpg" alt="Ayame car">
-                </a>
-
-                <div class="image-info">
-
-                    <h2>
-                        Ayame Car From X
-                    </h2>
-
-                    <span class="image-date">
-                        07/30/2026
-                    </span>
-
-                    <p>
-                        Ayame car I saw from X that looks cool.
-                    </p>
-
-                    <a href="/Gallery/AyameCar.jpg" class="view-link" target="_blank">
-                        » VIEW IMAGE
-                    </a>
-
-                </div>
-
-            </article>
-
-            <article class="gallery-item" data-category="art">
-
-                <a href="#" class="image-frame">
-                    <img src="/Gallery/miku.jpg" alt="Scanlined Miku">
-                </a>
-
-                <div class="image-info">
-
-                    <h2>
-                        Scanlined Miku
-                    </h2>
-
-                    <span class="image-date">
-                        08/18/2026
-                    </span>
-
-                    <p>
-                        Scanlines me like.
-                    </p>
-
-                    <a href="/Gallery/miku.jpg" class="view-link" target="_blank">
-                        » VIEW IMAGE
-                    </a>
-
-                </div>
-
-            </article>
-
-            <article class="gallery-item" data-category="photos">
-
-                <a href="#" class="image-frame">
-                    <img src="/Gallery/Monstah.jpg" alt="Monstah">
-                </a>
-
-                <div class="image-info">
-
-                    <h2>
-                        MONSTAHH BIGG
-                    </h2>
-
-                    <span class="image-date">
-                        08/12/2026
-                    </span>
-
-                    <p>
-                        I want it.
-                    </p>
-
-                    <a href="/Gallery/Monstah.jpg" class="view-link" target="_blank">
-                        » VIEW IMAGE
-                    </a>
-
-                </div>
-
-            </article>
-
+              <a
+                href="../../Gallery/Monstah.jpg"
+                class="view-link"
+                target="_blank"
+              >
+                » VIEW IMAGE
+              </a>
+            </div>
+          </article>
         </section>
 
         <section class="gallery-footer">
+          <span> LAST UPDATED: 09/01/2026 </span>
 
-            <span>
-                LAST UPDATED: 09/01/2026
-            </span>
+          <span> · </span>
 
-            <span>
-                ·
-            </span>
-
-            <span>
-                KEEP LOOKING AROUND
-            </span>
-
+          <span> KEEP LOOKING AROUND </span>
         </section>
+      </main>
 
-    </main>
+      <footer class="footer">
+        <div>© 2026 Jane's Website</div>
 
-    <footer class="footer">
+        <div>Best viewed at 1024 × 768</div>
 
-        <div>
-            © 2026 Jane's Website
-        </div>
+        <div>Made with HTML &amp; CSS &amp; JavaScript</div>
+      </footer>
+    </div>
 
-        <div>
-            Best viewed at 1024 × 768
-        </div>
+    <script>
+      const categories = document.querySelectorAll(".category");
+      const galleryItems = document.querySelectorAll(".gallery-item");
+      const galleryCount = document.getElementById("gallery-count");
 
-        <div>
-            Made with HTML &amp; CSS &amp; JavaScript
-        </div>
+      categories.forEach((category) => {
+        category.addEventListener("click", (event) => {
+          event.preventDefault();
 
-    </footer>
+          categories.forEach((item) => {
+            item.classList.remove("active");
+          });
 
-</div>
+          category.classList.add("active");
 
-<script>
-    const categories = document.querySelectorAll(".category");
-    const galleryItems = document.querySelectorAll(".gallery-item");
-    const galleryCount = document.getElementById("gallery-count");
+          const selectedCategory = category.dataset.category;
+          let visibleCount = 0;
 
-    categories.forEach(category => {
-        category.addEventListener("click", event => {
-            event.preventDefault();
+          galleryItems.forEach((item) => {
+            const itemCategory = item.dataset.category;
 
-            categories.forEach(item => {
-                item.classList.remove("active");
-            });
+            if (
+              selectedCategory === "all" ||
+              itemCategory === selectedCategory
+            ) {
+              item.style.display = "";
+              visibleCount++;
+            } else {
+              item.style.display = "none";
+            }
+          });
 
-            category.classList.add("active");
-
-            const selectedCategory = category.dataset.category;
-            let visibleCount = 0;
-
-            galleryItems.forEach(item => {
-                const itemCategory = item.dataset.category;
-
-                if (
-                    selectedCategory === "all" ||
-                    itemCategory === selectedCategory
-                ) {
-                    item.style.display = "";
-                    visibleCount++;
-                } else {
-                    item.style.display = "none";
-                }
-            });
-
-            galleryCount.textContent =
-                String(visibleCount).padStart(3, "0");
+          galleryCount.textContent = String(visibleCount).padStart(3, "0");
         });
-    });
-</script>
-
-</body>
+      });
+    </script>
+  </body>
 </html>
